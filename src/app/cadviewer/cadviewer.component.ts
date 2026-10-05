@@ -1132,14 +1132,14 @@ export class CadviewerComponent implements OnInit {
       //        FileName = ServerBackEndUrl+ "/content/drawings/dwg/hq17_2spaces.dwg";	
       //        FileName = ServerBackEndUrl+ "/content/drawings/dwg/BRA_Alta Vila_02_CkIn_06082020.dwg";
 
-      FileName = ServerBackEndUrl + "/content/drawings/dwg/hq17_.dwg";
+      FileName = ServerBackEndUrl + "content/drawings/dwg/hq17_.dwg";
 
 
       // PATH and FILE to be loaded, can be in formats DWG, DXF, DWF, SVG , JS, DGN, PCF, JPG, GIF, PNG
       //      FileName = ServerBackEndUrl+ "/content/drawings/dwg/BRA_Alta Vila_02_CkIn_06082020.dwg";
       //      FileName = ServerBackEndUrl+ "/content/drawings/dwg/hq17_2spaces.dwg";	
 
-      FileName = ServerBackEndUrl + "/content/drawings/dwg/hq17_.dwg";
+      FileName = ServerBackEndUrl + "content/drawings/dwg/hq17_.dwg";
 
 
 
@@ -1321,9 +1321,9 @@ export class CadviewerComponent implements OnInit {
 
     // NOTE BELOW: THESE SETTINGS ARE FOR SERVER CONTROLS FOR UPLOAD OF REDLINES
 
-    cadviewer.cvjs_setRedlinesAbsolutePath(ServerBackEndUrl + '/content/redlines/v7/', ServerLocation + '/content/redlines/v7/', false);
+    cadviewer.cvjs_setRedlinesAbsolutePath(ServerBackEndUrl + 'content/redlines/v7/', ServerLocation + '/content/redlines/v7/', false);
     cadviewer.cvjs_setServerFileLocation_AbsolutePaths(ServerLocation + '/content/drawings/dwg/', ServerBackEndUrl + 'content/drawings/dwg/', "", "");
-    cadviewer.cvjs_setSpaceObjectsAbsolutePath(ServerBackEndUrl + '/content/spaceObjects/demoUsers/', ServerLocation + '/content/spaceObjects/demoUsers/', true);
+    cadviewer.cvjs_setSpaceObjectsAbsolutePath(ServerBackEndUrl + 'content/spaceObjects/demoUsers/', ServerLocation + '/content/spaceObjects/demoUsers/', true);
 
 
     // NOTE BELOW: THESE SETTINGS ARE FOR SERVER CONTROLS FOR CONVERTING DWG, DXF, DWF files         
@@ -1710,9 +1710,9 @@ export class CadviewerComponent implements OnInit {
     //  window.alert("hello!"+ myInputString);
     var drawing = ((document.getElementById("drawingName") as HTMLInputElement).value);
     var isformat = (drawing.toLowerCase().indexOf(".dwg") > 0 || drawing.toLowerCase().indexOf(".dxf") > 0 || drawing.toLowerCase().indexOf(".dwf") > 0 || drawing.toLowerCase().indexOf(".pdf") > 0);
-    window.alert("Drawing format correct: " + isformat + " cadviewer.cvjs_LoadDrawing: " + cadviewer.cvjs_getServerBackEndUrl() + "/content/drawings/dwg/" + drawing);
+    window.alert("Drawing format correct: " + isformat + " cadviewer.cvjs_LoadDrawing: " + cadviewer.cvjs_getServerBackEndUrl() + "content/drawings/dwg/" + drawing);
     if (drawing != '' && isformat)
-      cadviewer.cvjs_LoadDrawing("floorPlan", cadviewer.cvjs_getServerBackEndUrl() + "/content/drawings/dwg/" + drawing);
+      cadviewer.cvjs_LoadDrawing("floorPlan", cadviewer.cvjs_getServerBackEndUrl() + "content/drawings/dwg/" + drawing);
   }
 
 
