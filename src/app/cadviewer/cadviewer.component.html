@@ -55,94 +55,38 @@
 
   </div>
   <div style="flex: 1; padding: 0; position: relative; display: flex; flex-direction: column;">
-<table>
-    <tr>
-        <td>
-            <input style="margin-left: 10px" type="text" id="singleID" placeholder="Single ID" />
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 10px" (click)="customHighlightSingleID()">Highlight Single ID</button>
-        </td>
-        <td>
-            <button class="btn btn-danger btn-sm" style="margin-left: 10px" (click)="customDeleteSingleID()">Delete Single ID</button>
-        </td>
-        <td>
-            <input style="margin-left: 10px" type="text" id="drawingName" placeholder="Drawing name (no path)" />
-        </td>
-        <td>
-            <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-right:10px" (click)="customLoadDrawing()">Load Drawing</button>
-        </td>
-        <td><strong>Multiselected:</strong><canvas id="dummy" width="10" height="10"></canvas>
-        </td>
-        <td *ngFor="let space of myMultiSelect">({{space.SpaceID}}, {{space.Area}})&nbsp;</td>
-    </tr>
-</table><table border="0" style="margin-top: 5px;">
-    <tr>
-        <td>
-            <button class="btn btn-outline-info btn-sm" style="margin-left: 5px" (click)="cadviewerDragSelectSpaces()">Select Spaces by DRAG RECT</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customStartMultiSelect()">StartMultiSelect</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customFinishMultiSelect()">FinishMultiSelect</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customGetAllSpaceObjects()">Get All Spaces</button>
-        </td>
-        <td>
-            <button class="btn btn-danger btn-sm" style="margin-left: 5px" (click)="customClearSpaces()">Clear All </button>
-        </td>
-
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customColorLayer()">Change Layer Color</button>
-        </td>
-        <td>
-            <input style="margin-left: 10px" type="text" id="layerName" value="RM_" />
-        </td>
-        <td>
-            <input style="margin-left: 10px" type="text" id="layerColor" value="#0045FF" />
-        </td>
-
-
-    </tr>
-    <tr>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customColorSpaces()">Highlight Spaces</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customSpaceBorders()">Color Borders</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customTooltips()">Custom Tooltip</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customClearTooltips()">Clear Tooltips</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customHatchSpaces()">Hatch Spaces</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customAddTextToSpaces()">Text In Spaces</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="getJSONredlinesandnotes()">Restore JSON Redlines</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="togglesensorstates()">Toggle Sensor</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="printModal()">PrintModal</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="activateHandles()">activateHandles</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="testLoadSVGDirect()">testLoadSVGDirect</button>
-        </td>
-    </tr>
-</table>
-<br>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; align-items: center; padding-left: 10px;">
+    <input type="text" id="singleID" placeholder="Single ID" />
+    <button class="btn btn-outline-secondary btn-sm" (click)="customHighlightSingleID()">Highlight Single ID</button>
+    <button class="btn btn-danger btn-sm" (click)="customDeleteSingleID()">Delete Single ID</button>
+    <input type="text" id="drawingName" placeholder="Drawing name (no path)" />
+    <button class="btn btn-primary btn-sm" (click)="customLoadDrawing()">Load Drawing</button>
+    <strong style="margin-left: 10px;">Multiselected:</strong><canvas id="dummy" width="10" height="10"></canvas>
+    <span *ngFor="let space of myMultiSelect">({{space.SpaceID}}, {{space.Area}})&nbsp;</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; align-items: center; padding-left: 10px;">
+    <button class="btn btn-outline-info btn-sm" (click)="cadviewerDragSelectSpaces()">Select Spaces by DRAG RECT</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customStartMultiSelect()">StartMultiSelect</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customFinishMultiSelect()">FinishMultiSelect</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customGetAllSpaceObjects()">Get All Spaces</button>
+    <button class="btn btn-danger btn-sm" (click)="customClearSpaces()">Clear All</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customColorLayer()">Change Layer Color</button>
+    <input type="text" id="layerName" value="RM_" />
+    <input type="text" id="layerColor" value="#0045FF" />
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; padding-left: 10px;">
+    <button class="btn btn-outline-secondary btn-sm" (click)="customColorSpaces()">Highlight Spaces</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customSpaceBorders()">Color Borders</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customTooltips()">Custom Tooltip</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customClearTooltips()">Clear Tooltips</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customHatchSpaces()">Hatch Spaces</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="customAddTextToSpaces()">Text In Spaces</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="getJSONredlinesandnotes()">Restore JSON Redlines</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="togglesensorstates()">Toggle Sensor</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="printModal()">PrintModal</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="activateHandles()">activateHandles</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="testLoadSVGDirect()">testLoadSVGDirect</button>
+</div>
 
 
 <div id="floorPlan">
@@ -151,6 +95,7 @@
 
   </div>
 </div>
+
 
 
 
