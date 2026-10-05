@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { fromEvent, Observable, Subscription } from "rxjs";
 
 import * as cadviewer from "cadviewer";
@@ -912,7 +912,7 @@ export class CadviewerComponent implements OnInit {
     */
 
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
 
   }
 
@@ -1684,10 +1684,14 @@ export class CadviewerComponent implements OnInit {
       let endpoint = "listdwgdirectory";
       if (!ServerBackEndUrl.endsWith("/")) endpoint = "/" + endpoint;
       const response = await fetch(ServerBackEndUrl + endpoint + "?loginFeatureEnabled=false", {
-        headers: { "Accept": "application/json" }
+        headers: { 
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        }
       });
       if (response.ok) {
         this.folderStructure = await response.json();
+        this.cdr.detectChanges();
       }
     } catch (e) {
       console.error("Failed to fetch folder structure", e);
