@@ -1700,18 +1700,7 @@ export class CadviewerComponent implements OnInit {
 
   public loadSelectedDrawing(drawingPath: string) {
     if (drawingPath) {
-      let fullPath = drawingPath;
-      if (!drawingPath.startsWith("http")) {
-        let backendUrl = cadviewer.cvjs_getServerBackEndUrl();
-        if (backendUrl.endsWith("/") && drawingPath.startsWith("/")) {
-          fullPath = backendUrl + drawingPath.substring(1);
-        } else if (!backendUrl.endsWith("/") && !drawingPath.startsWith("/")) {
-          fullPath = backendUrl + "/" + drawingPath;
-        } else {
-          fullPath = backendUrl + drawingPath;
-        }
-      }
-      cadviewer.cvjs_LoadDrawing('floorPlan', fullPath);
+      cadviewer.cvjs_LoadDrawing('floorPlan', drawingPath);
     }
   }
 
