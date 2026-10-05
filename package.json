@@ -1,0 +1,75 @@
+{
+    "name":  "cadviewer-testapp-angular-02",
+    "version":  "12.20.21",
+    "description":  "CADViewer - JavaScript CAD Viewer sample implementation for Angular 21 with TypeScript",
+    "scripts":  {
+                    "ng":  "ng",
+                    "start":  "ng serve",
+                    "build":  "ng build",
+                    "watch":  "ng build --watch --configuration development",
+                    "test":  "ng test"
+                },
+    "private":  true,
+    "dependencies":  {
+                         "@angular/animations":  "^21.0.0",
+                         "@angular/common":  "^21.0.0",
+                         "@angular/compiler":  "^21.0.0",
+                         "@angular/core":  "^21.0.0",
+                         "@angular/forms":  "^21.0.0",
+                         "@angular/platform-browser":  "^21.0.0",
+                         "@angular/platform-browser-dynamic":  "^21.0.0",
+                         "@angular/router":  "^21.0.0",
+                         "@types/cadviewer":  "^7.0.0",
+                         "cadviewer":  "^12.20.21",
+                         "canvg":  "^4.0.1",
+                         "jquery":  "^3.6.0",
+                         "resize-observer-polyfill":  "^1.5.1",
+                         "rxjs":  "^7.8.1",
+                         "tslib":  "^2.3.0",
+                         "webpack":  "^5.73.0",
+                         "zone.js":  "~0.15.1"
+                     },
+    "devDependencies":  {
+                            "@angular-devkit/build-angular":  "^21.0.0",
+                            "@angular/cli":  "~21.0.0",
+                            "@angular/compiler-cli":  "^21.0.0",
+                            "@types/jasmine":  "~4.0.0",
+                            "css-loader":  "^6.7.1",
+                            "jasmine-core":  "~4.1.0",
+                            "karma":  "~6.3.0",
+                            "karma-chrome-launcher":  "~3.1.0",
+                            "karma-coverage":  "~2.2.0",
+                            "karma-jasmine":  "~5.0.0",
+                            "karma-jasmine-html-reporter":  "~1.7.0",
+                            "style-loader":  "^3.3.1",
+                            "typescript":  "~5.8.3"
+                        },
+    "author":  "charnung",
+    "license":  "TMS 1.0",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "https://github.com/CADViewer/cadviewer-testapp-angular-02"
+                   },
+    "bugs":  {
+                 "url":  "https://github.com/CADViewer"
+             },
+    "homepage":  "https://cadviewer.com",
+    "keywords":  [
+                     "CAD",
+                     "javascript",
+                     "CAD Viewer",
+                     "DWG",
+                     "DXF",
+                     "DWF",
+                     "PDF",
+                     "DGN",
+                     "TIFF",
+                     "Annotate",
+                     "Redline",
+                     "Space Management",
+                     "CAFM",
+                     "IOT",
+                     "Asset Management",
+                     "IWMS"
+                 ]
+}

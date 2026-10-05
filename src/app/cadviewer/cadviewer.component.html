@@ -1,0 +1,135 @@
+<div style="display: flex; align-items: center; padding-bottom: 15px; padding-top: 10px; margin-left: 10px;">
+  <a href="https://cadviewer.com/cadviewertechdocs" style="text-decoration: none; margin-right: 15px; display: inline-block;">
+    <img src="assets/cadviewer-primary-logo.svg" height="55" alt="CADViewer Logo" style="display: block;" />
+  </a>
+  <div style="flex: 1;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+      <h4 style="margin: 0;">
+        CADViewer: <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg" width="24" height="24" style="vertical-align: middle; margin-top: -4px;" alt="Angular Logo" /> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" width="24" height="24" style="vertical-align: middle; margin-top: -4px;" alt="NodeJS Logo" /> Angular 21 & NodeJS Sample
+      </h4>
+      
+      <span style="font-size: 16px; font-weight: bold; margin-right: 15px;">
+        <a href="https://github.com/CADViewer/cadviewer-testapp-angular-02" target="_blank" style="text-decoration: none; color: #0366d6; background-color: #f6f8fa; padding: 4px 10px; border-radius: 6px; border: 1px solid #d1d5da; display: inline-block;">
+          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" height="20" alt="GitHub Logo" style="vertical-align: middle;"/>
+          <span style="vertical-align: middle; margin-left: 5px;">Pull or clone from GitHub</span>
+        </a>
+      </span>
+    </div>
+    <div style="font-size: 13px; color: #333;">
+      Read <a href="https://cadviewer.com/highlight/main/">Create Hotspots</a>, 
+      <a href="https://cadviewer.com/highlight2/main/">Edit Spaces</a> and our <a href="https://cadviewer.com/cadviewertechdocs/">Tech Docs</a>. <b>NOTE:</b> You must install the <a href="https://github.com/CADViewer/cadviewer-conversion-server">Back-End CAD conversion server!</a>
+      Have fun and contact us at <a href="mailto:developer@cadviewer.com">developer@cadviewer.com</a> or <a href="mailto:intern@cadviewer.com">intern@cadviewer.com</a>.
+    </div>
+  </div>
+</div>
+
+<div style="display: flex; height: 80vh; width: 100%;">
+  <div style="width: 250px; background-color: #f8f9fa; border-right: 1px solid #ddd; overflow-y: auto; padding: 10px; margin-right: 10px;">
+    <h5>Sample Drawings</h5>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('hq17_.dwg')">HQ17 (DWG)</li>
+      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('1st floor architectural.dwg')">1st Floor (DWG)</li>
+      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('3442-LP1.svg')">3442-LP1 (SVG)</li>
+      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('2344-LP1.svg')">2344-LP1 (SVG)</li>
+    </ul>
+  </div>
+  <div style="flex: 1; padding: 10px; position: relative;">
+<table>
+    <tr>
+        <td>
+            <input style="margin-left: 10px" type="text" id="singleID" placeholder="Single ID" />
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 10px" (click)="customHighlightSingleID()">Highlight Single ID</button>
+        </td>
+        <td>
+            <button class="btn btn-danger btn-sm" style="margin-left: 10px" (click)="customDeleteSingleID()">Delete Single ID</button>
+        </td>
+        <td>
+            <input style="margin-left: 10px" type="text" id="drawingName" placeholder="Drawing name (no path)" />
+        </td>
+        <td>
+            <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-right:10px" (click)="customLoadDrawing()">Load Drawing</button>
+        </td>
+        <td><strong>Multiselected:</strong><canvas id="dummy" width="10" height="10"></canvas>
+        </td>
+        <td *ngFor="let space of myMultiSelect">({{space.SpaceID}}, {{space.Area}})&nbsp;</td>
+    </tr>
+</table>
+
+<br>
+<table border="0">
+    <tr>
+        <td>
+            <button class="btn btn-outline-info btn-sm" style="margin-left: 5px" (click)="cadviewerDragSelectSpaces()">Select Spaces by DRAG RECT</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customStartMultiSelect()">StartMultiSelect</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customFinishMultiSelect()">FinishMultiSelect</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customGetAllSpaceObjects()">Get All Spaces</button>
+        </td>
+        <td>
+            <button class="btn btn-danger btn-sm" style="margin-left: 5px" (click)="customClearSpaces()">Clear All </button>
+        </td>
+
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customColorLayer()">Change Layer Color</button>
+        </td>
+        <td>
+            <input style="margin-left: 10px" type="text" id="layerName" value="RM_" />
+        </td>
+        <td>
+            <input style="margin-left: 10px" type="text" id="layerColor" value="#0045FF" />
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customColorSpaces()">Highlight Spaces</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customSpaceBorders()">Color Borders</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customTooltips()">Custom Tooltip</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customClearTooltips()">Clear Tooltips</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customHatchSpaces()">Hatch Spaces</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="customAddTextToSpaces()">Text In Spaces</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="getJSONredlinesandnotes()">Restore JSON Redlines</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="togglesensorstates()">Toggle Sensor</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="printModal()">PrintModal</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="activateHandles()">activateHandles</button>
+        </td>
+        <td>
+            <button class="btn btn-outline-secondary btn-sm" style="margin-left: 5px" (click)="testLoadSVGDirect()">testLoadSVGDirect</button>
+        </td>
+    </tr>
+</table>
+<br>
+
+
+<div id="floorPlan">
+</div>
+
+
+  </div>
+</div>
