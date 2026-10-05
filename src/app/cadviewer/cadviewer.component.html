@@ -24,16 +24,38 @@
 </div>
 
 <div style="display: flex; height: 80vh; width: 100%;">
-  <div style="width: 250px; background-color: #f8f9fa; border-right: 1px solid #ddd; overflow-y: auto; padding: 10px; margin-right: 10px;">
-    <h5>Sample Drawings</h5>
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('hq17_.dwg')">HQ17 (DWG)</li>
-      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('1st floor architectural.dwg')">1st Floor (DWG)</li>
-      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('3442-LP1.svg')">3442-LP1 (SVG)</li>
-      <li class="list-group-item list-group-item-action" style="cursor: pointer" (click)="loadSelectedDrawing('2344-LP1.svg')">2344-LP1 (SVG)</li>
-    </ul>
+  <div style="width: 300px; background-color: #f8f9fa; border-right: 1px solid #ddd; overflow-y: auto; padding: 10px; margin-right: 10px; font-size: 14px;">
+    <h5 style="margin-bottom: 15px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">Folder Structure</h5>
+
+    <ng-template #folderNode let-node="node" let-level="level">
+      <div [style.paddingLeft.px]="level * 15" style="padding-top: 4px; padding-bottom: 4px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <!-- If folder -->
+        <div *ngIf="node.children" (click)="toggleFolder(node.path, $event)" style="display: flex; align-items: center;">
+          <span style="margin-right: 5px; font-size: 16px;">
+            {{ expandedFolders.has(node.path) ? '??' : '??' }}
+          </span>
+          <span style="font-weight: 500; color: #333;">{{ node.name }}</span>
+        </div>
+        <!-- If file -->
+        <div *ngIf="!node.children" (click)="loadSelectedDrawing(node.path)" style="display: flex; align-items: center;">
+          <span style="margin-right: 5px; font-size: 16px;">??</span>
+          <span style="color: #0366d6;" title="{{ node.name }}">{{ node.name }}</span>
+        </div>
+      </div>
+      <!-- Render children if expanded -->
+      <div *ngIf="node.children && expandedFolders.has(node.path)">
+        <ng-container *ngFor="let child of node.children">
+          <ng-container *ngTemplateOutlet="folderNode; context:{ node: child, level: level + 1 }"></ng-container>
+        </ng-container>
+      </div>
+    </ng-template>
+
+    <div *ngFor="let node of folderStructure">
+      <ng-container *ngTemplateOutlet="folderNode; context:{ node: node, level: 0 }"></ng-container>
+    </div>
+
   </div>
-  <div style="flex: 1; padding: 10px; position: relative;">
+  <div style="flex: 1; padding: 10px; position: relative; overflow-x: auto;">
 <table>
     <tr>
         <td>
@@ -133,5 +155,6 @@
 
   </div>
 </div>
+
 
 

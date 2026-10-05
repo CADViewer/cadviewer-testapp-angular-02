@@ -917,6 +917,7 @@ export class CadviewerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchFolderStructure();
 
 
     this.resizeObserver = new ResizeObserver(this.resizeCallback);
@@ -1666,13 +1667,47 @@ export class CadviewerComponent implements OnInit {
 
 
 
-  public loadSelectedDrawing(drawingName: string) {
-    if (drawingName) {
-      if (drawingName.toLowerCase().indexOf('.svg') > 0) {
-        cadviewer.cvjs_LoadDrawing('floorPlan', cadviewer.cvjs_getServerBackEndUrl() + '/content/custom/bpretail/zthcvtest.blob.core.windows.net/svg/' + drawingName);
-      } else {
-        cadviewer.cvjs_LoadDrawing('floorPlan', cadviewer.cvjs_getServerBackEndUrl() + '/content/drawings/dwg/' + drawingName);
+  public folderStructure: any[] = [];
+  public expandedFolders: Set<string> = new Set<string>();
+
+  public toggleFolder(path: string, event: Event) {
+    event.stopPropagation();
+    if (this.expandedFolders.has(path)) {
+      this.expandedFolders.delete(path);
+    } else {
+      this.expandedFolders.add(path);
+    }
+  }
+
+  public async fetchFolderStructure() {
+    try {
+      let endpoint = "listdwgdirectory";
+      if (!ServerBackEndUrl.endsWith("/")) endpoint = "/" + endpoint;
+      const response = await fetch(ServerBackEndUrl + endpoint + "?loginFeatureEnabled=false", {
+        headers: { "Accept": "application/json" }
+      });
+      if (response.ok) {
+        this.folderStructure = await response.json();
       }
+    } catch (e) {
+      console.error("Failed to fetch folder structure", e);
+    }
+  }
+
+  public loadSelectedDrawing(drawingPath: string) {
+    if (drawingPath) {
+      let fullPath = drawingPath;
+      if (!drawingPath.startsWith("http")) {
+        let backendUrl = cadviewer.cvjs_getServerBackEndUrl();
+        if (backendUrl.endsWith("/") && drawingPath.startsWith("/")) {
+          fullPath = backendUrl + drawingPath.substring(1);
+        } else if (!backendUrl.endsWith("/") && !drawingPath.startsWith("/")) {
+          fullPath = backendUrl + "/" + drawingPath;
+        } else {
+          fullPath = backendUrl + drawingPath;
+        }
+      }
+      cadviewer.cvjs_LoadDrawing('floorPlan', fullPath);
     }
   }
 
