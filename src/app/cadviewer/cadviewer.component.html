@@ -30,20 +30,19 @@
     <ng-template #folderNode let-node="node" let-level="level">
       <div [style.paddingLeft.px]="level * 15" style="padding-top: 4px; padding-bottom: 4px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
         <!-- If folder -->
-        <div *ngIf="node.children" (click)="toggleFolder(node.path, $event)" style="display: flex; align-items: center;">
-          <span style="margin-right: 5px; font-size: 16px;">
-            {{ expandedFolders.has(node.path) ? '??' : '??' }}
+        <div *ngIf="node.isFolder !== false" (click)="toggleFolder(node.path, $event)" style="display: flex; align-items: center;">
+          <span style="margin-right: 5px; font-size: 16px;" [innerHTML]="expandedFolders.has(node.path) ? '&#128194;' : '&#128193;'">
           </span>
           <span style="font-weight: 500; color: #333;">{{ node.name }}</span>
         </div>
         <!-- If file -->
-        <div *ngIf="!node.children" (click)="loadSelectedDrawing(node.path)" style="display: flex; align-items: center;">
-          <span style="margin-right: 5px; font-size: 16px;">??</span>
+        <div *ngIf="node.isFolder === false" (click)="loadSelectedDrawing(node.path)" style="display: flex; align-items: center;">
+          <span style="margin-right: 5px; font-size: 16px;" innerHTML="&#128196;"></span>
           <span style="color: #0366d6;" title="{{ node.name }}">{{ node.name }}</span>
         </div>
       </div>
       <!-- Render children if expanded -->
-      <div *ngIf="node.children && expandedFolders.has(node.path)">
+      <div *ngIf="node.isFolder !== false && expandedFolders.has(node.path)">
         <ng-container *ngFor="let child of node.children">
           <ng-container *ngTemplateOutlet="folderNode; context:{ node: child, level: level + 1 }"></ng-container>
         </ng-container>
